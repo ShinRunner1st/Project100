@@ -1,0 +1,110 @@
+#include <iostream>
+using namespace std;
+
+int money = 100; 
+
+int bet(int current_bet)
+{
+    int b;
+    cout << "Enter bet amount: ";
+    cin >> b;
+    if (b > money) {
+        cout << "You do not have enough money. Please enter a lower amount.\n";
+        return bet(current_bet);
+    }
+    money -= b;
+    cout << "Bet placed. Money remaining: " << money << endl;
+    return b;
+}
+
+void call(int current_bet)
+{
+    if (money < current_bet) {
+        cout << "You do not have enough money to call. Please choose another option.\n";
+        return;
+    }
+    money -= current_bet;
+    cout << "Called. Bet "<< current_bet << ". Money remaining: " << money << endl;
+}
+
+void raise(int current_bet)
+{
+    int amount;
+    cout << "Enter raise amount: ";
+    cin >> amount;
+    if (amount > money) {
+        cout << "You do not have enough money. Please enter a lower amount.\n";
+        return raise(current_bet);
+    }
+    if (amount <= current_bet) {
+        cout << "Raise amount must be greater than current bet. Please enter a higher amount.\n";
+        return raise(current_bet);
+    }
+    money -= amount;
+    cout << "Raised. Money remaining: " << money << endl;
+}
+
+void fold()
+{
+    cout << "You folded. Final money: " << money << endl;
+    exit(0);
+}
+
+int showChoice()
+{
+    cout << "--------------------\n";
+    int c;
+    cout << "Type '1' to Bet\n";
+    cout << "Type '2' to Call\n";
+    cout << "Type '3' to Raise\n";
+    cout << "Type '4' to Fold\n";
+    cout << "Type '5' to Pass\n";
+    cout << "--------------------\n";
+    cin >> c;
+    cout << "--------------------\n";
+    
+    return c;
+}
+
+void action(int &current_round)
+{
+    
+    int current_bet;
+    cout << "Round " << current_round << endl;
+    cout << "Remaning Money: " << money << endl;
+    int choice = showChoice();
+    switch (choice) {
+        case 1:
+            current_bet = bet(current_bet);
+            break;
+        case 2:
+            call(current_bet);
+            break;
+        case 3:
+            raise(current_bet);
+            break;
+        case 4:
+            fold();
+        case 5:
+            cout << "Pass\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            action(current_round);
+            return;
+    }
+    current_round++;
+}
+
+/*
+int main() 
+{
+    int r=1;
+    action(r);
+    action(r);
+    action(r);
+    action(r);
+    action(r);
+
+    return 0;
+}
