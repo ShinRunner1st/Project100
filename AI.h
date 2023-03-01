@@ -5,17 +5,24 @@
 #include<iomanip>
 #include<vector>
 #include<bits/stdc++.h>
+#include<algorithm>
 
 using namespace std;
 
 class AI
 {
     vector<string> straightpatterns = {"A2345","23456","34567","45678","56789","678910","78910J","8910JQ","910JQK"};
+    int defmoney;
 
     public:
         vector<int> hand; //max 2
         string name;
         int lv;
+        int money;
+
+        AI(int);
+
+        int RaiseMoney();
 
         int Seclect_Action(vector<int>, int);
         int Calc_Hand(vector<int>);
@@ -25,13 +32,63 @@ class AI
         bool isonepair(vector<string>);
         bool istwopairs(vector<string>);
         bool isthreeofakind(vector<string>);
+        bool isstraight(vector<string>);
         bool isfullhouse(vector<string>);
         bool isfourofakind(vector<string>);
-        bool isstraight(vector<string>);
+        bool isstraightflush(vector<string>);
 };
+
+AI::AI(int amount = 1000) //set default money
+{
+    defmoney = amount;
+    money = amount;
+}
+
+int AI::RaiseMoney()
+{
+    int random = rand()% 100 + 1;
+    int out = money;
+    if(money <= defmoney / 2)
+    {
+        if(random < 10)
+        {
+            money -= out/10;
+            return out/10; // 10% 1/10 money
+        }
+        else if(random < 40)
+        {
+            money -= out/2;
+            return out/2; // 30% 1/2 money
+        }
+        else
+        {
+            money -= out;
+            return out; // 60% allin
+        }
+    }
+    else
+    {
+        if(random < 10)
+        {
+            money -= out;
+            return out; // 10% allin
+        }
+        else if(random < 50)
+        {
+            money -= out/2;
+            return out/2; // 40% 1/2 money
+        }
+        else
+        {
+            money -= out/10;
+            return out/10; // 50% 1/10 money
+        }
+    }
+}
 
 int AI::Seclect_Action(vector<int> table_card, int player_action) // 0 = Call , 1 = Raise , 2 = Fold , 3 = Bet(only player)
 {
+    if(money > defmoney) defmoney = money;
     int random = rand()% 100 + 1;
     int turn = table_card.size() - 4;
     switch (Calc_Hand(table_card))
@@ -77,6 +134,12 @@ int AI::Seclect_Action(vector<int> table_card, int player_action) // 0 = Call , 
         else if(random < 91 && player_action != 1) return 1; // 90% raise
         else return 0; // 9% call
         break;
+    
+    case 7: // sf
+        if(random < 1) return 2; // 1% fold
+        else if(random < 91 && player_action != 1) return 1; // 90% raise
+        else return 0; // 9% call
+        break;
     }
     return 2;
 }
@@ -84,7 +147,8 @@ int AI::Seclect_Action(vector<int> table_card, int player_action) // 0 = Call , 
 int AI::Calc_Hand(vector<int> table_card)
 {
     vector<string> Calc = FormatNumber(Sort(table_card));
-    if (isfourofakind(Calc)) return 6;
+    if (isstraightflush(Calc)) return 7;
+    else if (isfourofakind(Calc)) return 6;
     else if (isfullhouse(Calc)) return 5;
     else if (isstraight(Calc)) return 4;
     else if (isthreeofakind(Calc)) return 3;
@@ -113,33 +177,6 @@ vector<string> AI::FormatNumber(vector<int> card)
         case 0:
             result.push_back("A");
             break;
-        case 1:
-            result.push_back("2");
-            break;
-        case 2:
-            result.push_back("3");
-            break;
-        case 3:
-            result.push_back("4");
-            break;
-        case 4:
-            result.push_back("5");
-            break;
-        case 5:
-            result.push_back("6");
-            break;
-        case 6:
-            result.push_back("7");
-            break;
-        case 7:
-            result.push_back("8");
-            break;
-        case 8:
-            result.push_back("9");
-            break;
-        case 9:
-            result.push_back("10");
-            break;
         case 10:
             result.push_back("J");
             break;
@@ -150,10 +187,37 @@ vector<string> AI::FormatNumber(vector<int> card)
             result.push_back("K");
             break;
         default:
+            result.push_back(to_string(card[i]%13 + 1));
             break;
         }
     }
 
+    return result;
+}
+
+bool AI::isstraightflush(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter >= input.size())
+    {
+        string combined;
+        for (int i = 0; i < input.size() - 4; i++)
+        {
+            combined = input[i] + input[i + 1] + input[i + 2] + input[i + 3] + input[i + 4];
+            for (string x : straightpatterns)
+            {
+                if (x == combined)
+                {
+                    result = true;
+                }
+            }
+        }
+    }
     return result;
 }
 
@@ -213,16 +277,15 @@ bool AI::isstraight(vector<string> input)
     if (counter >= input.size())
     {
         string combined;
-        for (int i = 0; i < input.size() - 4; i++)
+        for (int i = 0; i < input.size(); i++) combined += input[i];
+        
+        for (string x : straightpatterns)
         {
-            combined = input[i] + input[i + 1] + input[i + 2] + input[i + 3] + input[i + 4];
-            for (string x : straightpatterns)
-            {
-                if (x == combined)
-                {
-                    result = true;
-                }
-            }
+            sort(begin(combined), end(combined));
+            sort(begin(x), end(x));
+            std::string intersection;
+            std::set_intersection(begin(combined), end(combined), begin(x), end(x),back_inserter(intersection));
+            if(intersection.size() >= 5) result = true;
         }
     }
     return result;
@@ -258,19 +321,30 @@ bool AI::isonepair(vector<string> input)
     return result;
 }
 
-//int main()
-//{
-//    srand(time(0));
-//    AI test; //create ai
-//    test.hand = {25,13}; // (K A)
-//    vector<int> Table = {8,1,2,3,4}; // (9 2 3 4 5)
-//
-//    // Test
-//    int AI_action = test.Seclect_Action(Table,0); // 0 = Call , 1 = Raise , 2 = Fold , 3 = Bet(only player)
-//
-//    if(AI_action == 0) cout << "Call";
-//    else if (AI_action == 1) cout << "Raise";
-//    else if (AI_action == 2) cout << "Fold";
-//
-//    return 0;
-//}
+/*
+int main()
+{
+    srand(time(0));
+    AI test(100000);
+    test.hand = {25,13}; // (K A)
+    vector<int> table = {8,1,2,3,4}; // (9 2 3 4 5)
+
+    // Test
+    int AI_action = test.Seclect_Action(table,0); // 0 = Call , 1 = Raise , 2 = Fold , 3 = Bet(only player)
+
+    if(AI_action == 0) cout << "Call"; //test.money -= player_bet_money; //บอทเลือก call ให้ลบเงินบอทตามจำนวนเงินที่ player bet
+    else if (AI_action == 1) cout << "Raise " << test.RaiseMoney(); //บอทเลือก raise ให้ใช้ RaiseMoney เพื่อสุ่มจำนวนเงินที่บอทจะลงเพิ่ม ปล.หักเงินใน function แล้ว
+    else if (AI_action == 2) cout << "Fold";
+
+    cout << test.Calc_Hand(table);
+    cout << endl;
+    for(int i = 0; i < 7; i++) cout << test.FormatNumber(test.Sort(table))[i] << " ";
+    cout << endl;
+    cout << test.isstraight(test.FormatNumber(test.Sort(table)));
+
+    cout << test.money << endl;
+    cout << "Raise " << test.RaiseMoney() << endl;
+    cout << test.money;
+
+    return 0;
+}*/
