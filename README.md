@@ -1,2 +1,2 @@
 # Project100
-Console Poker game c++
+Poker game c++

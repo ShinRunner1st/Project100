@@ -12,6 +12,7 @@ using namespace std;
 
 class AI
 {
+    vector<string> straightpatterns = {"A2345","23456","34567","45678","56789","678910","78910J","8910JQ","910JQK"};
     int defmoney;
 
     public:
@@ -26,6 +27,17 @@ class AI
         int Call(int);
 
         int Seclect_Action(vector<int>, int);
+        int Calc_Hand(vector<int>);
+        vector<int> Sort(vector<int>);
+        vector<string> FormatNumber(vector<int>);
+        
+        bool isonepair(vector<string>);
+        bool istwopairs(vector<string>);
+        bool isthreeofakind(vector<string>);
+        bool isstraight(vector<string>);
+        bool isfullhouse(vector<string>);
+        bool isfourofakind(vector<string>);
+        bool isstraightflush(vector<string>);
 };
 
 AI::AI(int amount = 1000) //set default money
@@ -103,14 +115,14 @@ int AI::Raise()
     }
 }
 
-int AI::Seclect_Action(vector<int> table_card, int player_action = 3) // 0 = Call , 1 = Raise , 2 = Fold , 3 = Bet(only player)
+int AI::Seclect_Action(vector<int> table_card, int player_action) // 0 = Call , 1 = Raise , 2 = Fold , 3 = Bet(only player)
 {
     if(money > defmoney) defmoney = money;
     int random = rand()% 100 + 1;
     int turn = table_card.size() - 4;
     if(money != 0)
     {
-        switch (Evaluate_Hand(table_card, hand))
+        switch (Calc_Hand(table_card))
         {
         case 0: //noting
             if(random < 40) return 2; // 30% fold
@@ -162,6 +174,183 @@ int AI::Seclect_Action(vector<int> table_card, int player_action = 3) // 0 = Cal
         }
     }
     else return 2;
+}
+
+int AI::Calc_Hand(vector<int> table_card)
+{
+    vector<string> Calc = FormatNumber(Sort(table_card));
+    if (isstraightflush(Calc)) return 7;
+    else if (isfourofakind(Calc)) return 6;
+    else if (isfullhouse(Calc)) return 5;
+    else if (isstraight(Calc)) return 4;
+    else if (isthreeofakind(Calc)) return 3;
+    else if (istwopairs(Calc)) return 2;
+    else if (isonepair(Calc)) return 1;
+    else return 0;
+}
+
+vector<int> AI::Sort(vector<int> table_card)
+{
+    vector<int> Allsort = table_card;
+    Allsort.push_back(hand[0]);
+    Allsort.push_back(hand[1]);
+    sort(Allsort.begin(), Allsort.end());
+    
+    return Allsort;
+}
+
+vector<string> AI::FormatNumber(vector<int> card)
+{
+    vector<string> result;
+    for(int i = 0; i < card.size(); i++)
+    {
+        switch (card[i]%13)
+        {
+        case 0:
+            result.push_back("A");
+            break;
+        case 10:
+            result.push_back("J");
+            break;
+        case 11:
+            result.push_back("Q");
+            break;
+        case 12:
+            result.push_back("K");
+            break;
+        default:
+            result.push_back(to_string(card[i]%13 + 1));
+            break;
+        }
+    }
+
+    return result;
+}
+
+bool AI::isstraightflush(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter >= input.size())
+    {
+        string combined;
+        for (int i = 0; i < input.size() - 4; i++)
+        {
+            combined = input[i] + input[i + 1] + input[i + 2] + input[i + 3] + input[i + 4];
+            for (string x : straightpatterns)
+            {
+                if (x == combined)
+                {
+                    result = true;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+bool AI::isfourofakind(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter == input.size() + 12)
+    {
+        result = true;
+    }
+    return result;
+}
+
+bool AI::isthreeofakind(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter == input.size() + 6)
+    {
+        result = true;
+    }
+    return result;
+}
+
+bool AI::isfullhouse(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter == input.size() + 8)
+    {
+        result = true;
+    }
+    return result;
+}
+
+bool AI::isstraight(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter >= input.size())
+    {
+        string combined;
+        for (int i = 0; i < input.size(); i++) combined += input[i];
+        
+        for (string x : straightpatterns)
+        {
+            sort(begin(combined), end(combined));
+            sort(begin(x), end(x));
+            std::string intersection;
+            std::set_intersection(begin(combined), end(combined), begin(x), end(x),back_inserter(intersection));
+            if(intersection.size() >= 5) result = true;
+        }
+    }
+    return result;
+}
+
+bool AI::istwopairs(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter == input.size() + 4)
+    {
+        result = true;
+    }
+    return result;
+}
+
+bool AI::isonepair(vector<string> input)
+{
+    bool result = false;
+    int counter = 0;
+    for (int i = 0; i < input.size(); i++)
+    {
+        counter += count(input.begin(), input.end(), input[i]);
+    }
+    if (counter == input.size() + 2)
+    {
+        result = true;
+    }
+    return result;
 }
 
 /*
