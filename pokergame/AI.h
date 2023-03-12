@@ -171,8 +171,7 @@ int AI::Seclect_Action(vector<int> table_card, int player_action, int raise) // 
     }
     else
     {
-        cout << "error 2" << endl;
-        return 3;
+        return 3; //check only
     }
 }
 

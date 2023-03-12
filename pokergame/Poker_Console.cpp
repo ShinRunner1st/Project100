@@ -173,7 +173,7 @@ int GameLoop::RIPMONEY(int &money)
         {
             cout << "Input money : ";
             cin >> rip;
-            if(rip > money)
+            if(rip > money || rip < 0)
             {
                 cout << "Not have enough money" << endl;
                 continue;
