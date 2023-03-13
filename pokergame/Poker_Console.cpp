@@ -1,4 +1,3 @@
-#include "Player.h"
 #include "Graphic.h"
 #include <conio.h>
 #include <cctype>
@@ -8,10 +7,11 @@ using namespace std;
 class GameLoop
 {
     bool End = false;
+    vector<int> player_save_hand;
 
     public:
     vector<int> table_card;
-    int pot = 0;
+    long double pot = 0;
     int last_bet = 0;
     int previous_choice = -1;
     int round = 0;
@@ -20,11 +20,11 @@ class GameLoop
     int call_count = 0;
 
     GameLoop(Player &);
-    ~GameLoop(){}
+    ~GameLoop();
     vector<int> create_deck();
     void Deal_card(vector<int> &, vector<int> &);
     void render(Player, AI);
-    int RIPMONEY(int &);
+    long double RIPMONEY(long double &);
 };
 
 vector<int> GameLoop::create_deck() {
@@ -68,6 +68,7 @@ GameLoop::GameLoop(Player &player)
             round++;
             
             start:
+            system("cls");
             render(player, *ai);
             
             previous_choice = show_choice(previous_choice); // (-1 -> 1,2,3) (0 -> 1,2,3) (1 -> 0,2) (3 -> 1,2,3)
@@ -122,6 +123,7 @@ GameLoop::GameLoop(Player &player)
         round++;
 
         end:
+        system("cls");
         if(table_card.size() < 5)
         {
             if(player.fold == false)
@@ -149,13 +151,12 @@ GameLoop::GameLoop(Player &player)
         }
     }
 
-    cout << "Press Enter to Continue" << endl;
+    cout << endl << "Press Enter to Continue" << endl;
     getch();
+    delete ai;
+    player_save_hand = player.hand;
     player.hand.clear();
     player.fold = false;
-    delete ai;
-    system("cls");
-    
 }
 
 void GameLoop::Deal_card(vector<int> &deck, vector<int> &to)
@@ -164,98 +165,100 @@ void GameLoop::Deal_card(vector<int> &deck, vector<int> &to)
     deck.pop_back();
 }
 
-int GameLoop::RIPMONEY(int &money)
+long double GameLoop::RIPMONEY(long double &money)
 {
-    int rip = 0;
+    long double rip = 0;
     if(previous_choice == 1) // bet/raise
     {
         while(true)
         {
+            cout << "------------------------------------------------------" << endl;
             cout << "Input money : ";
             cin >> rip;
-            if(rip > money || rip < 0)
+            if((rip > money) || (rip < 0))
             {
                 cout << "Not have enough money" << endl;
                 continue;
             }
             else break;
         }
-        money -= rip;
+        money -= ceill(rip);
     }
     else if(previous_choice == 0) //call
     {
         if(money <= last_bet)
         {
             rip = money;
-            money -= rip; //all-in
+            money -= ceill(rip); //all-in
         }
         else
         {
             rip = last_bet;
-            money -= rip;
+            money -= ceill(rip);
         }
     }
 
-    return rip;
+    return ceill(rip);
 }
 
 void GameLoop::render(Player player, AI ai) // plain text graphic
 {
     if(round < 4)
     {
-        cout << "-----------------------------" << endl;
-        cout << "Table : "; show_card(table_card); cout << endl;
-        cout << "Pot : " << pot << endl << endl;
-        cout << "Action : "; show_lastaction(previous_choice); cout << endl; 
-        cout << "Last Bet : " << last_bet << endl;
-        cout << "AI Money : " << ai.money << endl;
-        cout << "-----------------------------" << endl;
-        cout << "Player : "; show_card(player.hand); cout << endl;
-        cout << "Player Money : " << player.money << endl;
-        cout << "-----------------------------" << endl;
+        screen_game(player, ai, table_card, pot, last_bet, previous_choice);
     }
     else // show all hand
     {
-        cout << "-----------------------------" << endl;
-        cout << "Table : "; show_card(table_card); cout << endl;
-        cout << "Pot : " << pot << endl << endl;
-        cout << "Action : "; show_lastaction(previous_choice);
-        if(Evaluate_Hand(table_card, ai.hand) > Evaluate_Hand(table_card, player.hand))
-        cout << "AI Win" << endl;
-        else
-        cout << "Player Win" << endl;
-        cout << "Last Bet : " << last_bet << endl;
-        cout << "AI Money : " << ai.money << endl;
-        cout << "-----------------------------" << endl;
-        cout << "Ai : "; show_card(ai.hand); cout << " "; show_cardrank(Evaluate_Hand(table_card, ai.hand)); cout << endl;
-        cout << "Player : "; show_card(player.hand); show_cardrank(Evaluate_Hand(table_card, player.hand)); cout << endl;
-        cout << "Player Money : " << player.money << endl;
-        cout << "-----------------------------" << endl;
+        screen_result(player, ai, table_card, pot, last_bet, previous_choice);
     }
 }
 
 int main()
 {
     char Isloop;
-    Player player; //import save data into this first
+    Player *player = new Player; //import save data into this first
     while(true)
     {
-        system("cls");
-        cout << "Money : " << player.money << endl;
-        cout << "Start/Continue? [Y]/[N]" << endl;
+        //system("cls");
+        screen_intro(player->money);
         cin >> Isloop;
 
         if(toupper(Isloop) == 'Y')
         {
-            GameLoop *g = new GameLoop(player);
+            GameLoop *g = new GameLoop(*player);
             delete g;
         }
         else
         {
+            delete player;
             break;
         }
     }
-    cout << "Quitting";
+
+    system("cls");
+    cout << "Quitting...";
+    getch();
 
     return 0;
+}
+
+GameLoop::~GameLoop()
+{
+    vector<string> tb = FORMAT_RANK_OUT(table_card);
+    vector<string> pl = FORMAT_RANK_OUT(player_save_hand);
+    ofstream output_flie("Last_match.txt");
+    output_flie << "Table : ";
+    for(int i = 0; i < tb.size(); i++)
+    {
+        output_flie << tb[i] << " ";
+    }
+    output_flie << endl;
+    output_flie << "Player : ";
+    for(int i = 0; i < pl.size(); i++)
+    {
+        output_flie << pl[i] << " ";
+    }
+    output_flie << endl << "Hand Rank : " << cardrank(Evaluate_Hand(table_card, player_save_hand)) << endl;
+    output_flie << "Pot : " << pot << endl;
+    output_flie.close();
 }

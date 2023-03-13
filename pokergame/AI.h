@@ -1,34 +1,36 @@
 #include "Evaluate_Hand.h"
 
+using namespace std;
+
 class AI
 {
-    int defmoney;
+    long double defmoney;
 
     public:
     
     vector<int> hand; //max 2
     string name;
     int lv;
-    int money;
+    long double money;
     bool fold = false;
 
-    AI(int);
+    AI(long double);
 
-    int Raise();
-    int Call(int);
+    long double Raise();
+    long double Call(long double);
 
     int Seclect_Action(vector<int>, int, int);
 };
 
-AI::AI(int amount = 1000) //set default money
+AI::AI(long double amount = 10000) //set default money
 {
     defmoney = amount;
     money = amount;
 }
 
-int AI::Call(int playerbetamount)
+long double AI::Call(long double playerbetamount)
 {
-    int temp = money;
+    long double temp = money;
     if(money >= 0)
     {
         if(playerbetamount >= money)
@@ -45,10 +47,10 @@ int AI::Call(int playerbetamount)
     else return 0;
 }
 
-int AI::Raise()
+long double AI::Raise()
 {
     int random = rand()% 100 + 1;
-    int out = money;
+    long double out = money;
     if(money > 2)
     {
         if(money <= defmoney / 2)

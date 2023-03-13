@@ -98,7 +98,7 @@ int Calc_Rank(vector<string> input, vector<int> rank)
             if(intersection.size() >= 5) result = 3;
         }
     }
-    if(counter_rank == rank.size() + 20) //flush
+    if(counter_rank >= rank.size() + 20) //flush
     {
         result = 4;
     }
@@ -139,17 +139,41 @@ int Evaluate_Hand(vector<int> table_card, vector<int> hand)
     return Calc_Rank(FormatNumber(sSort), FormatRank(sSort));
 }
 
-vector<string> FORFORFOR(vector<int> card)
+string cardrank(int rank)
 {
-    vector<string> output = FormatNumber(card);
-    for(int i = 0; i < card.size(); i++)
+    switch (rank)
     {
-        if(card[i] < 13) output[i] += "C";
-        else if(card[i] < 26) output[i] += "D";
-        else if(card[i] < 39) output[i] += "H";
-        else output[i] += "S";
+    case 0:
+        return "High Card";
+        break;
+    case 1:
+        return "Pair";
+        break;
+    case 2:
+        return "Two Pair";
+        break;
+    case 3:
+        return "Straight";
+        break;
+    case 4:
+        return "Flush";
+        break;
+    case 5:
+        return "Full house";
+        break;
+    case 6:
+        return "Three of a Kind";
+        break;
+    case 7:
+        return "Four of a Kind";
+        break;
+    case 8:
+        return "Straight Flush";
+        break;
+    default:
+        return "NULL";
+        break;
     }
-    return output;
 }
 
 // unfinish
