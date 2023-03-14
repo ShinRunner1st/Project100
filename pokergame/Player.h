@@ -4,7 +4,6 @@
 #include<cstdlib>
 #include<iomanip>
 #include<vector>
-#include<bits/stdc++.h>
 #include<algorithm>
 #include<fstream>
 

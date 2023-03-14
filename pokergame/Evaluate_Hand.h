@@ -4,8 +4,8 @@
 #include<cstdlib>
 #include<iomanip>
 #include<vector>
-#include<bits/stdc++.h>
 #include<algorithm>
+#include<cmath>
 
 using namespace std;
 
@@ -172,6 +172,31 @@ string cardrank(int rank)
         break;
     default:
         return "NULL";
+        break;
+    }
+}
+
+string lastaction(int previous)
+{
+    switch (previous)
+    {
+    case -1:
+        return "BOOM YOU GOT BUG ";
+        break;
+    case 0:
+        return "Call ";
+        break;
+    case 1:
+        return "Raise ";
+        break;
+    case 2:
+        return "Fold ";
+        break;
+    case 3:
+        return "Check ";
+        break;
+    default:
+        return "BOOM YOU GOT BUG ";
         break;
     }
 }

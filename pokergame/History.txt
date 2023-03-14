@@ -1,0 +1,7 @@
+------------------------------------------------------
+Table : 4H JS 7D 3C AC 
+Player : 6H KH 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : High Card
+Pot : 100

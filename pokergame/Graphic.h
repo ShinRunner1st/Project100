@@ -38,7 +38,7 @@ void old_show_card(const vector<int> card)
     }
 }
 
-void show_card(const vector<int> card) // temp plain text show card function // set 33 (center)
+void show_card(const vector<int> card) // temp plain text show card function //54/2=27 + string/2
 {
     /*if(card.size() == 0);
     else
@@ -49,7 +49,7 @@ void show_card(const vector<int> card) // temp plain text show card function // 
             cout << s[i] << " ";
         }
     }*/
-    double sset = floor(47.5+(-9.5*(double)card.size()));
+    double sset = ceill(38.5+(-5.5*(double)card.size()));
     if(card.size() == 0);
     else
     {
@@ -57,37 +57,45 @@ void show_card(const vector<int> card) // temp plain text show card function // 
         int n = card.size();
         for (int i = 0; i < n; i++)
         {
-            if(i == 0) cout << setw(sset) << " _______   ";
+            if(i == 0) cout << setw(sset) << " _______   "; //11
             else cout << " _______   ";
         }
         cout << "\n";
         for (int i = 0; i < n; i++)
         {
-            if(i == 0) cout << setw(sset-10) << "|" << s[i][1] << "      |  ";
+            if(i == 0) cout << setw(sset-10) << "|" << s[i][1] << "      |  "; //1
             else cout << "|" << s[i][1] << "      |  ";
         }
         cout << "\n";
         for (int i = 0; i < n; i++)
         {
-            if(i == 0) cout << setw(sset) << "|       |  ";
+            if(i == 0) cout << setw(sset) << "|       |  "; //11
             else cout << "|       |  ";
         }
         cout << "\n";
         for (int i = 0; i < n; i++)
         {
-            if(i == 0) cout << setw(sset-7) << "|   " << s[i][0] << "   |  ";
-            else cout << "|   " << s[i][0] << "   |  ";
+            if(s[i][0] == 'T')
+            {
+                if(i == 0) cout << setw(sset-7) << "|   " << "10" << "  |  "; //5
+                else cout << "|   " << "10" << "  |  ";
+            }
+            else
+            {
+                if(i == 0) cout << setw(sset-7) << "|   " << s[i][0] << "   |  "; //5
+                else cout << "|   " << s[i][0] << "   |  ";
+            }
         }
         cout << "\n";
         for (int i = 0; i < n; i++)
         {
-            if(i == 0) cout << setw(sset) << "|       |  ";
+            if(i == 0) cout << setw(sset) << "|       |  "; //11
             else cout << "|       |  ";
         }
         cout << "\n";
         for (int i = 0; i < n; i++)
         {
-            if(i == 0) cout << setw(sset) << "|_______|  ";
+            if(i == 0) cout << setw(sset) << "|_______|  "; //11
             else cout << "|_______|  ";
         }
         cout << "\n";
@@ -102,14 +110,23 @@ int show_choice(int previous = -1)
     case -1:
         while(true)
         {
-            cout << "Bet [1] | Fold [2] | Check [3]" << endl;
+            cout << setw(44) << "| Bet [1] | Fold [2] | Check [3] |" << endl;
             cout << "------------------------------------------------------" << endl;
             cout << ": ";
             cin >> action;
-            if(action == 1 || action == 2 || action == 3) break;
+            if(action == 1 || action == 2 || action == 3)
+            {
+                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                break;
+            }
             else
             {
-                cout << "Wrong input try again" << endl;
+                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                //cout << "Wrong input try again" << endl;
+                //cout << "------------------------------------------------------" << endl;
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
                 continue;
             }
         }
@@ -117,14 +134,20 @@ int show_choice(int previous = -1)
     case 0:
         while(true)
         {
-            cout << "Raise [1] | Fold [2] | Check [3]" << endl;
+            cout << setw(45) << "| Raise [1] | Fold [2] | Check [3] |" << endl;
             cout << "------------------------------------------------------" << endl;
             cout << ": ";
             cin >> action;
-            if(action == 1 || action == 2 || action == 3) break;
+            if(action == 1 || action == 2 || action == 3)
+            {
+                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                break;
+            }
             else
             {
-                cout << "Wrong input try again" << endl;
+                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 continue;
             }
         }
@@ -132,29 +155,38 @@ int show_choice(int previous = -1)
     case 1:
         while(true)
         {
-            cout << "Call [0] | Fold [2]" << endl;
+            cout << setw(39) << "| Call [1] | Fold [2] |" << endl;
             cout << "------------------------------------------------------" << endl;
             cout << ": ";
             cin >> action;
-            if(action == 0 || action == 2) break;
+            if(action == 1 || action == 2) break;
             else
             {
-                cout << "Wrong input try again" << endl;
+                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 continue;
             }
         }
+        if(action == 1) action = 0;
         break;
     case 3:
         while(true)
         {
-            cout << "Raise [1] | Fold [2] | Check [3]" << endl;
+            cout << setw(45) << "| Raise [1] | Fold [2] | Check [3] |" << endl;
             cout << "------------------------------------------------------" << endl;
             cout << ": ";
             cin >> action;
-            if(action == 1 || action == 2 || action == 3) break;
+            if(action == 1 || action == 2 || action == 3)
+            {
+                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                break;
+            }
             else
             {
-                cout << "Wrong input try again" << endl;
+                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 continue;
             }
         }
@@ -193,43 +225,44 @@ void show_lastaction(int previous)
 
 void show_cardrank(int rank)
 {
-    int set = 34;
+    int set = 27; //+ string/2
     switch (rank)
     {
     case 0:
-        cout << setw(set-3) << "High Card";
+        cout << setw(set+5) << "High Card"; //9/2 5
         break;
     case 1:
-        cout << setw(set-5) << "Pair";
+        cout << setw(set+2) << "Pair"; //4/2 2
         break;
     case 2:
-        cout << setw(set-4) << "Two Pair";
+        cout << setw(set+4) << "Two Pair"; //8/2 4
         break;
     case 3:
-        cout << setw(set) << "Straight";
+        cout << setw(set+4) << "Straight"; //8/2 4
         break;
     case 4:
-        cout << setw(set-5) << "Flush";
+        cout << setw(set+3) << "Flush"; //5/2 3
         break;
     case 5:
-        cout << setw(set) << "Full house";
+        cout << setw(set+5) << "Full house"; //10/2 5
         break;
     case 6:
-        cout << setw(set) << "Three of a Kind";
+        cout << setw(set+8) << "Three of a Kind"; //15/2 8
         break;
     case 7:
-        cout << setw(set) << "Four of a Kind";
+        cout << setw(set+7) << "Four of a Kind"; //14/2 7
         break;
     case 8:
-        cout << setw(set) << "Straight Flush";
+        cout << setw(set+7) << "Straight Flush"; //14/2 7
         break;
     default:
         break;
     }
 }
 
-void screen_intro(long double money)
+void screen_intro(long double money) //104/2 52
 {
+    system("cls");
     cout << R"(
  .----------------.   .----------------.   .----------------.   .----------------.   .----------------. 
 | .--------------. | | .--------------. | | .--------------. | | .--------------. | | .--------------. |
@@ -243,19 +276,21 @@ void screen_intro(long double money)
 | '--------------' | | '--------------' | | '--------------' | | '--------------' | | '--------------' |
  '----------------'   '----------------'   '----------------'   '----------------'   '----------------' 
 )";
-    cout << fixed << setprecision(0) << setw(52) << "Money : " << money << endl;
-    cout << "Start [Y] | [N]" << endl;
+    cout << fixed << setprecision(0) << setw(52) << "Money : " << money << endl << endl;
+    cout << setw(56) << "Start [Y]" << endl;
+    cout << setw(56) << "Exit  [N]" << endl << endl;
     cout << ": ";
 }
 
-void screen_result(Player player, AI ai, vector<int> table_card, long double pot, long double last_bet,int previous_choice)
+void screen_result(Player player, AI ai, vector<int> table_card, long double pot, long double last_bet,int previous_choice) //54/2=27 + string/2
 {
+    system("cls");
     cout << "------------------------------------------------------" << endl;
     show_card(table_card); cout << endl;
-    cout << setw(28) << "Pot : " << pot << endl << endl;
+    cout << setw(30) << "Pot : " << pot << endl << endl;
     cout << "------------------------------------------------------" << endl;
     //cout << "Last Bet : " << last_bet << endl;
-    cout << setw(27) << "AI" << endl;
+    cout << setw(28) << "AI" << endl;
     show_card(ai.hand); show_cardrank(Evaluate_Hand(table_card, ai.hand)); cout << endl;
     cout << "Money : " << ai.money << endl;
     cout << "Action : "; show_lastaction(previous_choice); cout << endl;
@@ -266,29 +301,30 @@ void screen_result(Player player, AI ai, vector<int> table_card, long double pot
     else
     cout << "Player Win" << endl;*/
     cout << "------------------------------------------------------" << endl;
-    cout << setw(29) << "Player" << endl;
+    cout << setw(30) << "Player" << endl;
     show_card(player.hand); show_cardrank(Evaluate_Hand(table_card, player.hand)); cout << endl;
     cout << "Player Money : " << player.money << endl;
     cout << "------------------------------------------------------" << endl;
     if(Evaluate_Hand(table_card, ai.hand) > Evaluate_Hand(table_card, player.hand))
-    cout << "AI Win" << endl;
+    cout << setw(30) << "AI Win" << endl;
     else
-    cout << "Player Win" << endl;
+    cout << setw(32) << "Player Win" << endl;
     cout << "------------------------------------------------------" << endl;
 }
 
 void screen_game(Player player, AI ai, vector<int> table_card, long double pot, long double last_bet,int previous_choice)
 {
+    system("cls");
     cout << "------------------------------------------------------" << endl;
     show_card(table_card); cout << endl;
-    cout << setw(28) << "Pot : " << pot << endl << endl;
+    cout << setw(30) << "Pot : " << pot << endl << endl;
     cout << "------------------------------------------------------" << endl;
     //cout << "Last Bet : " << last_bet << endl;
-    cout << setw(27) << "AI" << endl;
+    cout << setw(28) << "AI" << endl;
     cout << "Money : " << ai.money << endl;
     cout << "Action : "; show_lastaction(previous_choice); cout << endl;
     cout << "------------------------------------------------------" << endl;
-    cout << setw(29) << "Player" << endl;
+    cout << setw(30) << "Player" << endl;
     show_card(player.hand); cout << endl;
     cout << "Money : " << player.money << endl;
     cout << "------------------------------------------------------" << endl;
