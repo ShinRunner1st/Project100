@@ -329,3 +329,67 @@ void screen_game(Player player, AI ai, vector<int> table_card, long double pot, 
     cout << "Money : " << player.money << endl;
     cout << "------------------------------------------------------" << endl;
 }
+
+
+
+void screen_loadGame(string playerName, long double &money) {
+
+    
+    ifstream file("Savegame.txt");
+    string line;
+
+    
+    while (getline(file, line)) {
+        
+        char name[100];
+        long double cash;
+        sscanf(line.c_str(), "%s %Lf", name, &cash);
+
+        
+        if (playerName == name) {
+            
+            money = cash;
+            file.close();
+            return;
+        }
+
+    }
+    file.close();
+
+    
+    money = 20000;
+   
+    ofstream outfile("Savegame.txt", ios_base::app);
+    outfile << playerName << " " << money << endl;
+    outfile.close();
+
+}
+
+void screen_welcome(){
+         cout << R"(
+                                                               
+                                                  ___                                                                                
+                                                  `MM                                                                                
+                                                   MM                                                                                
+                          ____    _    ___  ____   MM   ____     _____  ___  __    __     ____                                       
+                          `MM(   ,M.   )M' 6MMMMb  MM  6MMMMb.  6MMMMMb `MM 6MMb  6MMb   6MMMMb                                      
+                           `Mb   dMb   d' 6M'  `Mb MM 6M'   Mb 6M'   `Mb MM69 `MM69 `Mb 6M'  `Mb                                     
+                            YM. ,PYM. ,P  MM    MM MM MM    `' MM     MM MM'   MM'   MM MM    MM                                     
+                            `Mb d'`Mb d'  MMMMMMMM MM MM       MM     MM MM    MM    MM MMMMMMMM                                     
+                             YM,P  YM,P   MM       MM MM       MM     MM MM    MM    MM MM                                           
+68b                          `MM'  `MM'   YM    d9 MM YM.   d9 YM.   ,M9 MM    MM    MM YM    d9                                     
+Y89                           YP  / YP     YMMMM9 _MM_ YMMMM9   YMMMMM9 _MM_  _MM_  _MM_ YMMMM9                                      
+___ ___  __  __ ____  ___   ___  /M          ____    ___  _____  ___   ___ ___  __      ___  __      ___    ___  __    __     ____   
+`MM `MM 6MMb `M6MMMMb `MM    MM /MMMMM       `MM(    )M' 6MMMMMb `MM    MM `MM 6MM      `MM 6MMb   6MMMMb   `MM 6MMb  6MMb   6MMMMb  
+ MM  MMM9 `Mb MM'  `Mb MM    MM  MM           `Mb    d' 6M'   `Mb MM    MM  MM69 "       MMM9 `Mb 8M'  `Mb   MM69 `MM69 `Mb 6M'  `Mb 
+ MM  MM'   MM MM    MM MM    MM  MM            YM.  ,P  MM     MM MM    MM  MM'          MM'   MM     ,oMM   MM'   MM'   MM MM    MM 
+ MM  MM    MM MM    MM MM    MM  MM             MM  M   MM     MM MM    MM  MM           MM    MM ,6MM9'MM   MM    MM    MM MMMMMMMM 
+ MM  MM    MM MM    MM MM    MM  MM             `Mbd'   MM     MM MM    MM  MM           MM    MM MM'   MM   MM    MM    MM MM       
+ MM  MM    MM MM.  ,M9 YM.   MM  YM.  ,          YMP    YM.   ,M9 YM.   MM  MM           MM    MM MM.  ,MM   MM    MM    MM YM    d9 
+_MM__MM_  _MM_MMYMMM9   YMMM9MM_  YMMM9           M      YMMMMM9   YMMM9MM__MM_         _MM_  _MM_`YMMM9'Yb._MM_  _MM_  _MM_ YMMMM9  
+              MM                                 d'                                                                                  
+              MM                             (8),P                                                                                   
+             _MM_                             YMM                                                                                    
+
+)";
+}

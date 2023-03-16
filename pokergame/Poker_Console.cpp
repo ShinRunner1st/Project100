@@ -220,7 +220,18 @@ void GameLoop::render(Player player, AI ai) // plain text graphic
 int main()
 {
     char Isloop;
-    Player *player = new Player; //import save data into this first
+    string playerName;
+    long double money;
+
+    screen_welcome();
+    cout << ": ";
+    getline(cin,playerName);
+
+    
+    screen_loadGame(playerName, money);
+    
+
+    Player *player = new Player(money,playerName); //import save data into this first
     while(true)
     {
         //system("cls");
