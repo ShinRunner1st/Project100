@@ -145,3 +145,45 @@ Last Action : Check
 Player Action : Check 
 Hand Rank : Flush
 Pot : 16000
+------------------------------------------------------
+Table : 2D 4S JD 
+Player : KS JS 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : Pair
+Pot : 200
+------------------------------------------------------
+Table : 4H 2S TD TH 6C 
+Player : JH TC 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Three of a Kind
+Pot : 22800
+------------------------------------------------------
+Table : 8D AD 2S 
+Player : TD KD 
+Last Action : Fold 
+Player Action : Check 
+Hand Rank : High Card
+Pot : 10600
+------------------------------------------------------
+Table : 5C 7H KH 4D KC 
+Player : 5D JC 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Two Pair
+Pot : 8000
+------------------------------------------------------
+Table : 5D TS AH 6S 9S 
+Player : 3D 8D 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : High Card
+Pot : 4100
+------------------------------------------------------
+Table : JC QC 6C 
+Player : 2H 6H 
+Last Action : Fold 
+Player Action : Raise 
+Hand Rank : Pair
+Pot : 24000

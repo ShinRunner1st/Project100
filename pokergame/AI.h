@@ -22,10 +22,10 @@ class AI
     int Seclect_Action(vector<int>, int, int);
 };
 
-AI::AI(long double amount = 10000) //set default money
+AI::AI(long double amount)
 {
-    defmoney = amount;
-    money = amount;
+    defmoney = amount*15 - amount;
+    money = amount*15 - amount;
 }
 
 long double AI::Call(long double playerbetamount)

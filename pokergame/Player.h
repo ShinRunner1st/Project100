@@ -20,39 +20,65 @@ public:
     long double money;
     bool fold = false;
 
-    Player(long double, string);
+    Player(string);
     ~Player();
 
-    void player_export(string , long double );
+    void player_import(string);
+    void player_export();
 };
 
-Player::Player(long double x, string y)
+Player::Player(string n)
 {
-    name = y;
-    money = x;
-    // import data to money
-    //ifstream input_flie("Save.txt");
-    //input_flie >> fixed >> money;
-    //input_flie.close();
+    player_import(n);
 }
 
 Player::~Player()
 {
-    player_export(name, money);
-
+    player_export();
 }
 
-void Player::player_export(string playername, long double m)
+void Player::player_import(string playerName) {
+
+    ifstream file("Savegame.txt");
+    string line;
+    
+    while (getline(file, line)) {
+        
+        char n[256];
+        long double cash;
+        sscanf(line.c_str(), "%s %Lf", n, &cash);
+
+        if (playerName == n) {
+            
+            name = playerName;
+            money = cash;
+            file.close();
+            return;
+        }
+
+    }
+    file.close();
+
+    money = 20000; //new account
+   
+    ofstream outfile("Savegame.txt", ios_base::app);
+    outfile << playerName << " " << money << endl;
+    outfile.close();
+    
+    name = playerName;
+}
+
+void Player::player_export()
 {
     ifstream input_flie("Savegame.txt"); //read file
     stringstream temp_flie; //temp file
     string textline;
     char nameTemp[256];
 
-    while (getline(input_flie, textline))
+    while (getline(input_flie, textline)) //linear search
     {
         sscanf(textline.c_str(), "%s", nameTemp); //search name
-        if (nameTemp == playername) temp_flie << playername + " " << m << endl; //if found write current playername and money to tempflie
+        if (nameTemp == name) temp_flie << name << " " << money << endl; //if found write current playername and money to tempflie
         else temp_flie << textline << endl; //write same line to temp file
     }
     input_flie.close();

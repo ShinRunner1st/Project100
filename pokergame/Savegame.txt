@@ -1,2 +1,3 @@
 Chart 0
 hello 15500
+haha 30100

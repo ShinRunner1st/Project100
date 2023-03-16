@@ -276,7 +276,7 @@ void screen_intro(long double money) //104/2 52
 | '--------------' | | '--------------' | | '--------------' | | '--------------' | | '--------------' |
  '----------------'   '----------------'   '----------------'   '----------------'   '----------------' 
 )";
-    cout << fixed << setprecision(0) << setw(52) << "Money : " << money << endl << endl;
+    cout << fixed << setprecision(0) << setw(54) << "Money : " << money << endl << endl;
     cout << setw(56) << "Start [Y]" << endl;
     cout << setw(56) << "Exit  [N]" << endl << endl;
     cout << ": ";
@@ -332,12 +332,10 @@ void screen_game(Player player, AI ai, vector<int> table_card, long double pot, 
 
 
 
-void screen_loadGame(string playerName, long double &money) {
+/*void screen_loadGame(string playerName, long double &money) {
 
-    
     ifstream file("Savegame.txt");
     string line;
-
     
     while (getline(file, line)) {
         
@@ -345,7 +343,6 @@ void screen_loadGame(string playerName, long double &money) {
         long double cash;
         sscanf(line.c_str(), "%s %Lf", name, &cash);
 
-        
         if (playerName == name) {
             
             money = cash;
@@ -356,17 +353,17 @@ void screen_loadGame(string playerName, long double &money) {
     }
     file.close();
 
-    
     money = 20000;
    
     ofstream outfile("Savegame.txt", ios_base::app);
     outfile << playerName << " " << money << endl;
     outfile.close();
 
-}
+}*/
 
 void screen_welcome(){
-         cout << R"(
+    system("cls");
+    cout << R"(
                                                                
                                                   ___                                                                                
                                                   `MM                                                                                
@@ -391,5 +388,29 @@ _MM__MM_  _MM_MMYMMM9   YMMM9MM_  YMMM9           M      YMMMMM9   YMMM9MM__MM_ 
               MM                             (8),P                                                                                   
              _MM_                             YMM                                                                                    
 
-)";
+)" << endl;
+    cout << setw(72) << "Username : "; // setw((screen weight + 11)/2)
+}
+
+long double screen_bet(long double &playermoney)
+{
+    long double b;
+    system("cls");
+    while(true)
+    {
+        cout << "Input Your Bet : ";
+        cin >> b;
+        if((b > playermoney) || (b <= 0))
+        {
+            printf("\033[A\33[2K\r");
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+        else
+        {
+            playermoney -= b;
+            return b;
+        }
+    }
 }

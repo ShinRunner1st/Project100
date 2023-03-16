@@ -46,7 +46,9 @@ vector<int> GameLoop::create_deck() {
 GameLoop::GameLoop(Player &player)
 {
     vector<int> deck = create_deck(); // create deck
-    AI *ai = new AI(1000); // create ai
+    pot += screen_bet(player.money);
+    AI *ai = new AI(pot); // create ai
+    pot *= 2;
     while(!End)
     {
         for(int i = 0; i < 2; i++) // deal 2 card to any player
@@ -221,17 +223,12 @@ int main()
 {
     char Isloop;
     string playerName;
-    long double money;
 
     screen_welcome();
-    cout << ": ";
     getline(cin,playerName);
+    //screen_loadGame(playerName, money);
 
-    
-    screen_loadGame(playerName, money);
-    
-
-    Player *player = new Player(money,playerName); //import save data into this first
+    Player *player = new Player(playerName); //import save data into this first
     while(true)
     {
         //system("cls");
