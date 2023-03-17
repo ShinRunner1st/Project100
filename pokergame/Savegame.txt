@@ -7,3 +7,10 @@ lolong 0
 hahah 150700
 ooo 0
 pp 40015
+eiei 27000
+ooooo 20000
+"toonice" 0.25
+123 19820
+?????? 0
+???? 1e-05
+ppp 320000

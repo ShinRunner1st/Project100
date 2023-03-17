@@ -327,3 +327,45 @@ Last Action : Check
 Player Action : Check 
 Hand Rank : Pair
 Pot : 30
+------------------------------------------------------
+Table : 8H 6S QS AD 9H 
+Player : 6C 9C 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Two Pair
+Pot : 14000
+------------------------------------------------------
+Table : 4C AC 5H 5D QS 
+Player : 3S AH 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Two Pair
+Pot : 304.5
+------------------------------------------------------
+Table : TD QH 8S TH 
+Player : KS 5D 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : Pair
+Pot : 40
+------------------------------------------------------
+Table : 2D AS 3H 6H 7D 
+Player : QS 2S 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Pair
+Pot : 320
+------------------------------------------------------
+Table : 7S KD 8D 9C 9S 
+Player : 2C AS 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Pair
+Pot : 93200
+------------------------------------------------------
+Table : 9C 9H 6H 2D QS 
+Player : 2S 4H 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Two Pair
+Pot : 320000

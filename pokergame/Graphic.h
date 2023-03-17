@@ -112,47 +112,47 @@ int show_choice(int previous, long double mm)
         {
             if(mm <= 0)
             {
-            cout << setw(34) << "| Fold [2] | Check [3] |" << endl;
-            cout << "------------------------------------------------------" << endl;
-            cout << ": ";
-            cin >> action;
-            if(action == 2 || action == 3)
-            {
-                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
-                break;
-            }
-            else
-            {
-                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                //cout << "Wrong input try again" << endl;
-                //cout << "------------------------------------------------------" << endl;
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                continue;
-            }
+                cout << setw(34) << "| Fold [2] | Check [3] |" << endl;
+                cout << "------------------------------------------------------" << endl;
+                cout << ": ";
+                cin >> action;
+                if(action == 2 || action == 3)
+                {
+                    if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                    break;
+                }
+                else
+                {
+                    printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    //cout << "Wrong input try again" << endl;
+                    //cout << "------------------------------------------------------" << endl;
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    continue;
+                }
             }
             else
             {
                 cout << setw(44) << "| Bet [1] | Fold [2] | Check [3] |" << endl;
-            cout << "------------------------------------------------------" << endl;
-            cout << ": ";
-            cin >> action;
-            if(action == 1 || action == 2 || action == 3)
-            {
-                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
-                break;
-            }
-            else
-            {
-                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                //cout << "Wrong input try again" << endl;
-                //cout << "------------------------------------------------------" << endl;
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                continue;
-            }
+                cout << "------------------------------------------------------" << endl;
+                cout << ": ";
+                cin >> action;
+                if(action == 1 || action == 2 || action == 3)
+                {
+                    if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                    break;
+                }
+                else
+                {
+                    printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    //cout << "Wrong input try again" << endl;
+                    //cout << "------------------------------------------------------" << endl;
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    continue;
+                }
             }
         }
         break;
@@ -161,44 +161,44 @@ int show_choice(int previous, long double mm)
         {
             if(mm <= 0)
             {
-            cout << setw(34) << "| Fold [2] | Check [3] |" << endl;
-            cout << "------------------------------------------------------" << endl;
-            cout << ": ";
-            cin >> action;
-            if(action == 2 || action == 3)
-            {
-                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
-                break;
+                cout << setw(34) << "| Fold [2] | Check [3] |" << endl;
+                cout << "------------------------------------------------------" << endl;
+                cout << ": ";
+                cin >> action;
+                if(action == 2 || action == 3)
+                {
+                    if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                    break;
+                }
+                else
+                {
+                    printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    //cout << "Wrong input try again" << endl;
+                    //cout << "------------------------------------------------------" << endl;
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    continue;
+                }
             }
             else
             {
-                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                //cout << "Wrong input try again" << endl;
-                //cout << "------------------------------------------------------" << endl;
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                continue;
-            }
-            }
-            else
-            {
-            cout << setw(45) << "| Raise [1] | Fold [2] | Check [3] |" << endl;
-            cout << "------------------------------------------------------" << endl;
-            cout << ": ";
-            cin >> action;
-            if(action == 1 || action == 2 || action == 3)
-            {
-                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
-                break;
-            }
-            else
-            {
-                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                continue;
-            }
+                cout << setw(45) << "| Raise [1] | Fold [2] | Check [3] |" << endl;
+                cout << "------------------------------------------------------" << endl;
+                cout << ": ";
+                cin >> action;
+                if(action == 1 || action == 2 || action == 3)
+                {
+                    if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                    break;
+                }
+                else
+                {
+                    printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    continue;
+                }
             }
         }
         break;
@@ -225,44 +225,44 @@ int show_choice(int previous, long double mm)
         {
             if(mm <= 0)
             {
-            cout << setw(34) << "| Fold [2] | Check [3] |" << endl;
-            cout << "------------------------------------------------------" << endl;
-            cout << ": ";
-            cin >> action;
-            if(action == 2 || action == 3)
-            {
-                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
-                break;
+                cout << setw(34) << "| Fold [2] | Check [3] |" << endl;
+                cout << "------------------------------------------------------" << endl;
+                cout << ": ";
+                cin >> action;
+                if(action == 2 || action == 3)
+                {
+                    if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                    break;
+                }
+                else
+                {
+                    printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    //cout << "Wrong input try again" << endl;
+                    //cout << "------------------------------------------------------" << endl;
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    continue;
+                }
             }
             else
             {
-                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                //cout << "Wrong input try again" << endl;
-                //cout << "------------------------------------------------------" << endl;
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                //printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                continue;
-            }
-            }
-            else
-            {
-            cout << setw(45) << "| Raise [1] | Fold [2] | Check [3] |" << endl;
-            cout << "------------------------------------------------------" << endl;
-            cout << ": ";
-            cin >> action;
-            if(action == 1 || action == 2 || action == 3)
-            {
-                if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
-                break;
-            }
-            else
-            {
-                printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                continue;
-            }
+                cout << setw(45) << "| Raise [1] | Fold [2] | Check [3] |" << endl;
+                cout << "------------------------------------------------------" << endl;
+                cout << ": ";
+                cin >> action;
+                if(action == 1 || action == 2 || action == 3)
+                {
+                    if(action == 1) printf("\033[A\33[2K\r\033[A\33[2K\r");
+                    break;
+                }
+                else
+                {
+                    printf("\033[A\33[2K\r\033[A\33[2K\r\033[A\33[2K\r");
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    continue;
+                }
             }
         }
         break;
@@ -470,8 +470,8 @@ long double screen_bet(long double &playermoney)
         }
         else
         {
-            playermoney -= b;
-            return b;
+            playermoney -= ceill(b);
+            return ceill(b);
         }
     }
 }
