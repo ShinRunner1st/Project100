@@ -1,3 +1,7 @@
 Chart 0
 hello 15500
 haha 30100
+white 0
+Rkom 30000
+lolong 0
+hahah 63700

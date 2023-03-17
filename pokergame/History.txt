@@ -187,3 +187,122 @@ Last Action : Fold
 Player Action : Raise 
 Hand Rank : Pair
 Pot : 24000
+------------------------------------------------------
+Table : 9S 7H AH 4C 8C 
+Player : 8D KS 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Pair
+Pot : 245000
+------------------------------------------------------
+Table : KH 9S 7S 2C 
+Player : AS QD 
+Last Action : Fold 
+Player Action : Check 
+Hand Rank : High Card
+Pot : 10000
+------------------------------------------------------
+Table : JS 8D 6C 4S KD 
+Player : 5D 4C 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Pair
+Pot : 20000
+------------------------------------------------------
+Table : 8S 2H 2D 6S 4H 
+Player : 4S TD 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Two Pair
+Pot : 40000
+------------------------------------------------------
+Table : 7S 4C 8C 2D 
+Player : 7C 9D 
+Last Action : Fold 
+Player Action : Call 
+Hand Rank : Pair
+Pot : 2350
+------------------------------------------------------
+Table : 5D 6S 2C 7H 
+Player : 8S JC 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : High Card
+Pot : 17000
+------------------------------------------------------
+Table : 3C KD 6D 9S JS 
+Player : 6S 9C 
+Last Action : Fold 
+Player Action : Call 
+Hand Rank : Two Pair
+Pot : 19000
+------------------------------------------------------
+Table : 2D KD 7C 
+Player : 4C 9D 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : High Card
+Pot : 2000
+------------------------------------------------------
+Table : AD 5D 4D 
+Player : AC AS 
+Last Action : Fold 
+Player Action : Raise 
+Hand Rank : Three of a Kind
+Pot : 4000
+------------------------------------------------------
+Table : 9S TC 9D 5S 
+Player : 8D AC 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Pair
+Pot : 24000
+------------------------------------------------------
+Table : AH 4S JH 
+Player : AC AS 
+Last Action : Fold 
+Player Action : Check 
+Hand Rank : Three of a Kind
+Pot : 44000
+------------------------------------------------------
+Table : 8C AH 2H 6C TC 
+Player : 8S 9C 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Pair
+Pot : 3000
+------------------------------------------------------
+Table : 3C QD 8S 
+Player : 7S 3H 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : Pair
+Pot : 34000
+------------------------------------------------------
+Table : 7S 9S 3S 8D 7C 
+Player : 9D AH 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Two Pair
+Pot : 200
+------------------------------------------------------
+Table : QD TD 2S 
+Player : TC AC 
+Last Action : Fold 
+Player Action : Check 
+Hand Rank : Pair
+Pot : 200
+------------------------------------------------------
+Table : JD TS 9S 9C 7S 
+Player : 4H AD 
+Last Action : Check 
+Player Action : Call 
+Hand Rank : Pair
+Pot : 2350
+------------------------------------------------------
+Table : 9C 4D 7C 
+Player : 3D AD 
+Last Action : Fold 
+Player Action : Fold 
+Hand Rank : High Card
+Pot : 200

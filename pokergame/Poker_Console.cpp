@@ -115,17 +115,18 @@ GameLoop::GameLoop(Player &player)
 
             if((check_count >= 2 || call_count >= 2))
             {
-                if(table_card.size() < 5) continue;
+                if(table_card.size() < 4) continue;
                 else break;
             }
             else goto start;
 
         }
-        while(table_card.size() < 5); // gameplay loop
+        while(table_card.size() < 4); // gameplay loop
         round++;
 
+        Deal_card(deck, table_card);
         end:
-        if(table_card.size() < 5)
+        if(table_card.size() < 4)
         {
             if(player.fold == false)
             {
@@ -209,7 +210,7 @@ long double GameLoop::RIPMONEY(long double &money)
 
 void GameLoop::render(Player player, AI ai) // plain text graphic
 {
-    if(round < 4)
+    if(round < 3)
     {
         screen_game(player, ai, table_card, pot, last_bet, previous_choice);
     }
@@ -221,7 +222,7 @@ void GameLoop::render(Player player, AI ai) // plain text graphic
 
 int main()
 {
-    char Isloop;
+    long double Isloop;
     string playerName;
 
     screen_welcome();
@@ -235,14 +236,22 @@ int main()
         screen_intro(player->money);
         cin >> Isloop;
 
-        if(toupper(Isloop) == 'Y')
+        if(Isloop == 1)
         {
+            if(player->money <= 0)
+            {
+                system("cls");
+                cout << "You have not enough money BYEBYE.";
+                delete player;
+                getch();
+                break;
+            }
             GameLoop *g = new GameLoop(*player);
             delete g;
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
-        else if(toupper(Isloop) == 'N')
+        else if(Isloop == 2)
         {
             delete player;
             break;

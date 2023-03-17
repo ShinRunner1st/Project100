@@ -107,8 +107,8 @@ int AI::Seclect_Action(vector<int> table_card, int player_action, int raise) // 
         switch (Evaluate_Hand(table_card, hand)) // (0 -> 1,2,3) (1 -> 0,2) (3 -> 1,2,3)
         {
         case 0: //noting
-            if(random < 30) return 2; // 30% fold
-            else if(random < 40 && player_action != 1 && raise < 2) return 1; // 10% raise
+            if(random < 15) return 2; // 15% fold
+            else if(random < 40 && player_action != 1 && raise < 2) return 1; // 25% raise
             else // 60% call
             {
                 if(player_action == 0 || player_action == 3) return 3;
@@ -117,29 +117,29 @@ int AI::Seclect_Action(vector<int> table_card, int player_action, int raise) // 
             break;
 
         case 1: //1 pair
-            if(random < 10) return 2; // 10% fold
-            else if(random < 50 && player_action != 1 && raise < 2) return 1; // 40% raise
+            if(random < 8) return 2; // 8% fold
+            else if(random < 50 && player_action != 1 && raise < 2) return 1; // 42% raise
             else if(player_action == 0 || player_action == 3) return 3;
             else return 0; // 50% call
             break;
 
         case 2: //2 pairs
-            if(random < 10) return 2; // 10% fold
-            else if(random < 50 && player_action != 1 && raise < 2) return 1; // 40% raise
+            if(random < 5) return 2; // 5% fold
+            else if(random < 50 && player_action != 1 && raise < 2) return 1; // 45% raise
             else if(player_action == 0 || player_action == 3) return 3;
             else return 0; // 50% call
             break;
         
         case 3: // 3 kind
-            if(random < 5) return 2; // 5% fold
-            else if(random < 75 && player_action != 1 && raise < 2) return 1; // 70% raise
+            if(random < 3) return 2; // 3% fold
+            else if(random < 75 && player_action != 1 && raise < 2) return 1; // 72% raise
             else if(player_action == 0 || player_action == 3) return 3;
             else return 0; // 25% call
             break;
 
         case 4: // staight
-            if(random < 5) return 2; // 5% fold
-            else if(random < 85 && player_action != 1 && raise < 2) return 1; // 80% raise
+            if(random < 3) return 2; // 3% fold
+            else if(random < 85 && player_action != 1 && raise < 2) return 1; // 82% raise
             else if(player_action == 0 || player_action == 3) return 3;
             else return 0; // 15% call
             break;

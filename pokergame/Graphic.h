@@ -276,9 +276,9 @@ void screen_intro(long double money) //104/2 52
 | '--------------' | | '--------------' | | '--------------' | | '--------------' | | '--------------' |
  '----------------'   '----------------'   '----------------'   '----------------'   '----------------' 
 )";
-    cout << fixed << setprecision(0) << setw(54) << "Money : " << money << endl << endl;
-    cout << setw(56) << "Start [Y]" << endl;
-    cout << setw(56) << "Exit  [N]" << endl << endl;
+    cout << endl << fixed << setprecision(0) << setw(54) << "Money : " << money << endl << endl;
+    cout << setw(56) << "Start [1]" << endl;
+    cout << setw(56) << "Exit  [2]" << endl << endl;
     cout << ": ";
 }
 
@@ -363,33 +363,19 @@ void screen_game(Player player, AI ai, vector<int> table_card, long double pot, 
 
 void screen_welcome(){
     system("cls");
-    cout << R"(
-                                                               
-                                                  ___                                                                                
-                                                  `MM                                                                                
-                                                   MM                                                                                
-                          ____    _    ___  ____   MM   ____     _____  ___  __    __     ____                                       
-                          `MM(   ,M.   )M' 6MMMMb  MM  6MMMMb.  6MMMMMb `MM 6MMb  6MMb   6MMMMb                                      
-                           `Mb   dMb   d' 6M'  `Mb MM 6M'   Mb 6M'   `Mb MM69 `MM69 `Mb 6M'  `Mb                                     
-                            YM. ,PYM. ,P  MM    MM MM MM    `' MM     MM MM'   MM'   MM MM    MM                                     
-                            `Mb d'`Mb d'  MMMMMMMM MM MM       MM     MM MM    MM    MM MMMMMMMM                                     
-                             YM,P  YM,P   MM       MM MM       MM     MM MM    MM    MM MM                                           
-68b                          `MM'  `MM'   YM    d9 MM YM.   d9 YM.   ,M9 MM    MM    MM YM    d9                                     
-Y89                           YP  / YP     YMMMM9 _MM_ YMMMM9   YMMMMM9 _MM_  _MM_  _MM_ YMMMM9                                      
-___ ___  __  __ ____  ___   ___  /M          ____    ___  _____  ___   ___ ___  __      ___  __      ___    ___  __    __     ____   
-`MM `MM 6MMb `M6MMMMb `MM    MM /MMMMM       `MM(    )M' 6MMMMMb `MM    MM `MM 6MM      `MM 6MMb   6MMMMb   `MM 6MMb  6MMb   6MMMMb  
- MM  MMM9 `Mb MM'  `Mb MM    MM  MM           `Mb    d' 6M'   `Mb MM    MM  MM69 "       MMM9 `Mb 8M'  `Mb   MM69 `MM69 `Mb 6M'  `Mb 
- MM  MM'   MM MM    MM MM    MM  MM            YM.  ,P  MM     MM MM    MM  MM'          MM'   MM     ,oMM   MM'   MM'   MM MM    MM 
- MM  MM    MM MM    MM MM    MM  MM             MM  M   MM     MM MM    MM  MM           MM    MM ,6MM9'MM   MM    MM    MM MMMMMMMM 
- MM  MM    MM MM    MM MM    MM  MM             `Mbd'   MM     MM MM    MM  MM           MM    MM MM'   MM   MM    MM    MM MM       
- MM  MM    MM MM.  ,M9 YM.   MM  YM.  ,          YMP    YM.   ,M9 YM.   MM  MM           MM    MM MM.  ,MM   MM    MM    MM YM    d9 
-_MM__MM_  _MM_MMYMMM9   YMMM9MM_  YMMM9           M      YMMMMM9   YMMM9MM__MM_         _MM_  _MM_`YMMM9'Yb._MM_  _MM_  _MM_ YMMMM9  
-              MM                                 d'                                                                                  
-              MM                             (8),P                                                                                   
-             _MM_                             YMM                                                                                    
+    cout << R"(                                            
+
+         _     _  _______  ___      _______  _______  __   __  _______                           
+        | | _ | ||       ||   |    |       ||       ||  |_|  ||       |                          
+        | || || ||    ___||   |    |       ||   _   ||       ||    ___|                          
+        |       ||   |___ |   |    |       ||  | |  ||       ||   |___                           
+        |       ||    ___||   |___ |      _||  |_|  ||       ||    ___|                          
+        |   _   ||   |___ |       ||     |_ |       || ||_|| ||   |___                           
+        |__| |__||_______||_______||_______||_______||_|   |_||_______|                          
+
 
 )" << endl;
-    cout << setw(72) << "Username : "; // setw((screen weight + 11)/2)
+    cout << setw(38) << "Username : "; // setw((screen weight + 11)/2)
 }
 
 long double screen_bet(long double &playermoney)
