@@ -4,4 +4,6 @@ haha 30100
 white 0
 Rkom 30000
 lolong 0
-hahah 63700
+hahah 150700
+ooo 0
+pp 40015

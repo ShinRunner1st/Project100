@@ -72,7 +72,7 @@ GameLoop::GameLoop(Player &player)
             start:
             render(player, *ai);
             
-            previous_choice = show_choice(previous_choice); // (-1 -> 1,2,3) (0 -> 1,2,3) (1 -> 0,2) (3 -> 1,2,3)
+            previous_choice = show_choice(previous_choice, player.money); // (-1 -> 1,2,3) (0 -> 1,2,3) (1 -> 0,2) (3 -> 1,2,3)
             last_player_action = previous_choice;
             if(previous_choice == 3) check_count++; // check 3
             else if(previous_choice == 1) // raise 1

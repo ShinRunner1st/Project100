@@ -306,3 +306,24 @@ Last Action : Fold
 Player Action : Fold 
 Hand Rank : High Card
 Pot : 200
+------------------------------------------------------
+Table : 9D 8C JD 4C 2C 
+Player : 2H 9C 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Two Pair
+Pot : 150700
+------------------------------------------------------
+Table : 4H 6C 9C 2D JH 
+Player : 9D KH 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Pair
+Pot : 40000
+------------------------------------------------------
+Table : AH 3C 6S 2C JC 
+Player : TH AS 
+Last Action : Check 
+Player Action : Check 
+Hand Rank : Pair
+Pot : 30
